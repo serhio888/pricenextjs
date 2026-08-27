@@ -29,7 +29,7 @@ const Position = ({ position, showInfo, descriptionHandler }) => {
           <span>{position["Продолжительность процедуры"]}</span>
         </div>
         <div className="unit_price position-price">
-          <span>{position["цена, ₽"]}</span>
+          <span>{position["цена"]}&nbsp;₽</span>
         </div>
       </button>
       {arrow ? (

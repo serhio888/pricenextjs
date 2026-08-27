@@ -19,8 +19,6 @@ export default function PriceListClient({ initialPositions, headerTable }) {
       setDescriptionArray([...descriptionArray, id]);
     }
   };
-
-  // Оптимизированный поиск через useMemo вместо функции searchPos()
   // Пересчитывается только при изменении строки поиска
   const needPosition = useMemo(() => {
     if (!searchPosition.trim()) return initialPositions;

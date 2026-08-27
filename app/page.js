@@ -1,12 +1,13 @@
 import React from "react";
 import Header from "./components/header/Header";
-import HeaderTable from "./components/headerTable/headerTable";
-// import CategoryTable from "./components/categorytable/categoryTable";
+import Footer from "./components/footer/footer";
 import PriceListClient from "./components/showinfo/priceListClient";
+
 
 
 import Papa from "papaparse";
 import { nanoid } from "nanoid";
+
 
 const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLxuGZdqHNd4WOc1IUYf_U_pR8jTpELHONnZ5xOIN6hMq9YCQRMjW73q69heqFfBwdS_Z5EDwBB2tn/pub?output=csv";
 
@@ -69,6 +70,7 @@ export default async function GoogleSheetsPage() {
     <div className="page">
         <Header/>
         <PriceListClient initialPositions={data.objPositions} headerTable={data.headers} />
+        <Footer/>
     </div>
     
   )
