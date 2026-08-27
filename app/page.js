@@ -66,10 +66,9 @@ export default async function GoogleSheetsPage() {
 
   
   return (
-    <div id="root">
+    <div className="page">
         <Header/>
         <PriceListClient initialPositions={data.objPositions} headerTable={data.headers} />
-        
     </div>
     
   )

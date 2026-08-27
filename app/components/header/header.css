@@ -1,4 +1,4 @@
-.visitka-header {
+/* .visitka-header {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -32,8 +32,8 @@
     color: #1e2a24;;
     position: relative;
 	cursor: pointer;
-	line-height: 1; /*задаём высоту строки*/
-	text-decoration: none; /*убираем подчёркивание*/
+	line-height: 1;
+	text-decoration: none; 
 }
 
 
@@ -67,4 +67,4 @@ a:focus:after {
     flex-direction: column;
     justify-content: start;
 }
-}
+} */

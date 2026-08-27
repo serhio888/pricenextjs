@@ -42,8 +42,15 @@ export default function PriceListClient({ initialPositions, headerTable }) {
   }, [searchPosition, initialPositions]);
 
   return (
-    <>
-      <div className="searchpanel">
+    <div className="price" id="price">
+      <div className="price-head">
+        <h2 className="display">Прайс</h2>
+        <p className="price-note">
+          Нажмите на название, чтобы прочитать описание процедуры.
+        </p>
+      </div>
+      <div className="toolbar-sentinel" aria-hidden="true"></div>
+      {/* <div className="searchpanel">
         <input
           type="text"
           onChange={searchHandler}
@@ -52,10 +59,30 @@ export default function PriceListClient({ initialPositions, headerTable }) {
           maxLength={15}
           id="input-search"
         />
+      </div> */}
+      <div className="toolbar">
+        <div className="search">
+          <input
+            type="search"
+            onChange={searchHandler}
+            value={searchPosition}
+            placeholder="Введите услугу или препарат"
+            maxLength={15}
+            id="input-search"
+            autoComplete="off"
+            aria-label="Поиск услуги или препарата"
+          />
+        </div>
+        <p
+          className="search-count"
+          id="search-count"
+          role="status"
+          hidden=""
+        ></p>
       </div>
 
       <div className="container">
-        <div className="table">
+        <div className="table" id="price-table">
           <HeaderTable header={headerTable} />
           {Object.keys(needPosition).map((key) => (
             <CategoryTable
@@ -68,6 +95,6 @@ export default function PriceListClient({ initialPositions, headerTable }) {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

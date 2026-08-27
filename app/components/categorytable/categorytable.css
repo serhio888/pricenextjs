@@ -1,4 +1,4 @@
-.categorytable {
+/* .categorytable {
     width: 100%;
     margin-bottom: 20px;
 }
@@ -38,7 +38,6 @@
     flex-grow: 0;
     flex-shrink: 0;
     hyphens: auto;
-    /* word-break: break-all; */
 }
 
 .down {
@@ -91,7 +90,6 @@
 
 .description {
     border-radius: 5px;
-    /* цвет фона сайта */
     background-color: #E0D1B2;
     margin-top: 5px;
      display: block;
@@ -118,4 +116,4 @@
     flex-grow: 0;
     flex-shrink: 0;
 }
-}
+} */

@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
 }
 
@@ -19,7 +19,6 @@
 body {
   margin: 0;
   font-family: Involve, Helvetica, sans-serif;
-  /* background: url('../public/assets/back.png'); */
   background-color: #e0d1b2;
   background-size: cover;
   background-attachment: fixed;
@@ -125,4 +124,1011 @@ p {
 }
 
 
+ */
 
+ @font-face {
+  font-family: "Cormorant";
+  src: url("../public/assets/Cormorant-Italic.ttf");
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Involve";
+  src: url("../public/assets/Involve-Regular.ttf");
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------- tokens */
+/* Радиусы: интерактивное - пилюля, поверхности - 16px, вложенное - 12px. */
+
+:root {
+  color-scheme: light;
+
+  --page: #f4f6f4;
+  --panel: #fcfdfc;
+  --ink: #17211d;
+  --muted: #5c6b64;
+  --line: #dce3de;
+  --line-strong: #c6d1cb;
+  --accent: #2e5c4c;
+  --accent-ink: #fcfdfc;
+  --accent-soft: #e9f0ec;
+  --shadow: 0 1px 2px rgb(23 33 29 / 4%), 0 12px 32px rgb(23 33 29 / 6%);
+
+  /* Портрет двухтональный: яркость/контраст выбивают светлый тон в чистый
+     белый, поэтому multiply убирает подложку и оставляет силуэт. */
+  --portrait-filter: grayscale(1) brightness(0.72) contrast(3.65);
+  --portrait-blend: multiply;
+
+  --r-surface: 16px;
+  --r-inner: 12px;
+  --r-pill: 999px;
+
+  /* Единая кривая на всю страницу: быстрый старт, долгое затухание.
+     Отклик на курсор держим коротким, раскрытие и появление - длиннее. */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-hover: 0.22s;
+  --t-open: 0.42s;
+  --t-enter: 0.7s;
+
+  --shell: 1080px;
+  --gutter: 24px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page: #0f1412;
+  --panel: #151b18;
+  --ink: #e8edea;
+  --muted: #9baaa3;
+  --line: #252e2a;
+  --line-strong: #33403a;
+  --accent: #7fbfa4;
+  --accent-ink: #0f1412;
+  --accent-soft: #1a2621;
+  --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 12px 32px rgb(0 0 0 / 35%);
+
+  --portrait-filter: grayscale(1) brightness(0.72) contrast(3.65) invert(1);
+  --portrait-blend: screen;
+}
+
+/* ---------------------------------------------------------------- base */
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100dvh;
+  margin: 0;
+  font-family: "Involve", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  background-color: var(--page);
+}
+
+p,
+h1,
+h2 {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.display {
+  font-family: "Cormorant", "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+  /* Курсивная кириллица (р, у, д) требует запаса под выносные элементы. */
+  line-height: 1.14;
+  padding-bottom: 2px;
+}
+
+.page {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ---------------------------------------------------------------- icons */
+
+.ico {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  background-color: currentColor;
+  -webkit-mask: var(--ico) center / contain no-repeat;
+  mask: var(--ico) center / contain no-repeat;
+}
+
+.ico-tel {
+  --ico: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC3ElEQVR4nO2ZTUhUURTHj31D1KbIPiiIVn0sQ1pG1K5w0wcUVFC5yN45T6Wg1SyjXbXKCCJnzp0akL6VQrAECSxIbebcNyYYQatMKSqighe3RIp0fPfJPK80P7i7GXg/zv06/wtQocLMEWS8WmHqEYUfhfGZpL1tMJt43lw3XxRe1orCvweOFnMNa2A2oK+eXiKMbf9KjI8H4Dpa1a/WigolJH4NYToMrtKvsFozFqeSGBsjkvZXgWvkc6kFwtQdUWKsKngHXEMUnbWRGB/sHwKX0IpexxJRNJzPnVwJrqAVfoopYrbkVnAFrfBVfBEKC1k6AC6gFbZOR0QUBuACmrFuWiKMX8AFBluaVgjTj2nIPAVX0Ewd8Svi0EkfZLzamBK9YSo1B1whDKFKmPpiLPRd4BqB8vZbStwFFwlDqNKMXZHPjwweA1cpKH+zVvQtoszIQNbbAK6imc5Hn2L4orelaTG4yECbt9B8YGQZpg7zH3CRfNrbpJk+W1TmVmdnah64iCg6YbUdM14xGwa4iEyYppTakukCuBoNaUWP7U57vOhkZfoVVgvToPU0y+2bC66Rz+E6zfjGcprdHrp2ZBG4htzALZrxvV1l6OFE54ypls7QURPFasbvokibK1JiMkVuqDFZsN2aob4/bwCB8neUOKfumaAwEZkC+zuF6atVZRSNmLuZZrwf4bfDOosHk0zqbWVC2zUmSSSaOkvbbaeZ/cBRkymUX0b5W0Xhu/LKkFln7S+zjWvLfvUXprflltHmfYYbasoqE7ScWm99aMarTA8kESvZdJgxN4APkNQThVbUXMaKdEOSCPvH7foZiiaSwd2QNMUsbbTqNNWU1bgEM9s20zmLQCOcRKLdiQ70dzqDT+ItcOwfSHtLwancTPl7baabMIrph8DdINDfo5kemSu8nkyEsSvgxuUwG5Dr9cvMrViYbpoHI/MMKIxDBYVnTJs9099X4b/lJ1n3N8J3KNJfAAAAAElFTkSuQmCC");
+}
+
+.ico-mail {
+  --ico: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAMKADAAQAAAABAAAAMAAAAADbN2wMAAAIE0lEQVRoBe1YW2xcxRk+M2fOZW+OgxuMQwGjNnhtp3ceWqNKcauqSaCBIGLY3UQiUEGa2Ltr09JAUetChZ0qyN51golUqyW2d00skiDANC2N04JCW7WqktS7TvJAqZwLIXbiy+6e65z+s9FxI8eXTS/ZffA87Jyd6/f9M/P9/wzHLaZFCyxaYNEC+bQAmjn5yP5nSjLaVLFuIiwKvDWzPh//NQBDON6UOOnSHYHWS1djmCZwIt54t4S5ZznK3WNadCk0mq67ukMevynGeAwj7n2Tcju8vra/MCxZkEM94TWSiF9zyoJnfEqZsCzuAkJcQVh/2mAIsFpcabFH9qQy+qRmUl+Vr/1tNPSLxpuwk/4VwJdnVD2qc/xO+RP9gnZLSUEREM+PIr2E3oI40uSQhaCi6iPw/SWCnWagyCWXT6TUQ5X+SGiacWF+fASwQsOxUIXHJX17PKXWYdhFTZSCsS1rf2FivhaVRenrJmAG8NvhXKByVTc5hNE3/tjTUHRt88IqGdy91Y15vla/gvk2zKyvGyYni8LDNwnk10M9DVWFBfnfaBK9wRW3lkgDksj7NMDMsMMqXElpVU85JeFrokAOD8WCdXZ5oeSJeMO9hOcHQWy+ntGMtI0rSwAcFocQap5Mq3skgZRKhLyWjIVaBqINkt0wXzlIOgIs20WeHADwt06m1F8hC/2UYWYpSwCD6HPUvAgqtGUqo4bhRKeLXNL2FaX44N9+uaU82zIPP396dVvJyb5Qj9sptoDMIAD/o8pAZLNlmReymG0CDJuFwFtDqgpEI7rBrU1ltNMep2O1y+EYPBULfYvV3ciU7A1+pVgS3i12O/wZ1ThnaHQ9gH+RYbCxsu/pM8D+2KnS3/Z7ahmrxlPKQRc4OMTzbyXioR+y5bTb/D/zZDzkJ4T8tsgpfRH803tUo7WVGyNvzTbnrARYQ69v19mzw8UbJtLqT4Az75HF1pN94fixvVtunm2g/0XZ6YEG6VS8sVXg+V6B4KVgwFf0UXWtd1Pk5Fzjz0mAdahtbjbgXDxv6PQBRTPOFLvlhx2ifDjR0/DVuQb8T8tP9zR82hzHB90uEVbaSqUVY6vXF/le9baXp+Ybc14Cdke2fOAraiHQO+x2StVEIL+BPfqEXf/f5ie661dxAhmE/b4azt4pSrk1VYH2zlzGzYkAGwgO9+nRc+g+2FLtBGMPBFR7hvvCrwzt2+rOZaK52iTi4W2yJLwNEvnZ8VRmIK0b36zwtb03V/uZ5TkTYB1rmtoy3kfaGxVN9+kG/Rgc35MilQ4d2xtcOXPghf4Pdz3tgTO1Ryb8LgiT5ckp9WfG8Nn1X9jYMbJQ36vrr4uA3dEy0VFK6SXmyp0OocYh4cND3bl77+Oxei9yae+4ZfEJzBAgRC3EjVQ392v2HLnm103gWPe2LwsiPuJxyl64PxyBkLYHPPcyUeRz8t7JWMN3HLz4uyUu+Z7xtPLnjGLuhEiYgGftTMbCTbkCt9tdF4FhuHY6RfENj1O8cyKlDOiW9mCVP7Ipo+kh2AbKEvDenyklBxO9T91hT2Dn+/Zt4E/GG58VICSQRbIcBCHuIfyaykD7D3Rq1oPyUFnkX0r0BJ+2++SSZ71vLg1PdIdXYWT1uWSp9PKU0ucm+DFvXWeG9QW5iybj4eMpRd+zxCmtBnJHhuPhFxCPDtGMplgSXoFN/IxTJutAjnUIV56DPjvsa2uVL7o70RtSRIHrBHHYkYgFuSp/9Oe54MppBRKx8AMOEb3hcoil4Fz2fniRPnpbXVsWvD1Jpa/9iEn1Wua9QVXK3Q6xixo0CfI4TBD5oNjjWKeoxkeart8PvqXVBm/3rwpEulTd2AwXFQ1C+x0sgLPr5ssXJAD3g4cEHsVgjxaBhO46X7b08bXBDnW2QZn3Pvb6mYdSihZIK9q7EOFOsaDLotbxyUmlxbT0muqNu96ZrS8rqw509OqmuRnEQQOFa0nGgxAFzJ/m3UKwDR7jMeoUCC/C9ngeLLfggHX9/SbXz8Vg2tiHB8LFWoYnd5V5LqPaZmN+KFdqK32RGMRC7E8XnLfmZCxYBNvt+2AMa7b+c64ALOFTAo+7CI9FsOaPcwE/c4I717dfrvC/dDFX8HZ/RkLXaQC8fwbUrgkcZnSwuXlWY89KgEWeoBQ7Lc4yVVUPgxd+wR78RuWgTvuBRB0o3BhEpfVld411Dg5eS2KaAHyYDBxo8YtOUWg1YB/Ck95mL9wPbhTomfOwGAweHNiZGvW45O+WnRvrBLlFNlbWnl3XLAmuZ6ppPAnPihVsyUDqMvBw9PjKTR3xmYPm4z8c5hoe8wdcsnjzxJQSRdhKioR0Zl9TIB6BZxbYLBb3T4dEbjdMOgZkHl3p73gzH2DnmvNEd7AGHN1+EJRSiADOQrvlIDAcpiYdgbcheFbhbzcgQNNM9f5CA89IfW5T9KhhauvhYJ+HHbOcyTP4jHOYwzgCB5YDy09oJreu2v/y+3NZId/llf7dH2iKsdYwrXFZyopSlGi6shfs3wSOaplJ6b1wZfzH5+XRUW5DtdXfP3RD7sALGWYDYOEAS4IrX8ab2oOEYBd49Y8tM/NqFiALFUSCYg5JcMAl+hMIzM6zFYKTURAE4GUdxIeDxyuubIlb/lQ6o2U0agYghjowDfDvvcFauEg/B0p0N1ikCAgAjwJKV8BMwHk9CpepFoid/sDQTROwoQ7H65eblrAUYfOaOrtNPnKL8hYh3OWKurYz+Zh/cc5FCyxaYNECs1vgX6/2ibq2VDJCAAAAAElFTkSuQmCC");
+}
+
+.ico-place {
+  --ico: url("data:image/png;base64,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");
+}
+
+.brandlogo {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+/* ---------------------------------------------------------------- header */
+
+.site-header {
+  padding: clamp(32px, 6vw, 64px) 0 clamp(28px, 4vw, 44px);
+  border-bottom: 1px solid var(--line);
+}
+
+.identity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: end;
+}
+
+.portrait {
+  --pw: clamp(140px, 18vw, 216px);
+
+  width: var(--pw);
+  height: calc(var(--pw) * 1.4974);
+  background-image: url("../public/assets/back.png");
+  background-repeat: no-repeat;
+  background-size: calc(var(--pw) * 4.9231) auto;
+  background-position: calc(var(--pw) * -0.04615) calc(var(--pw) * -0.04615);
+  filter: var(--portrait-filter);
+  mix-blend-mode: var(--portrait-blend);
+  -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+}
+
+.identity-text h1 {
+  font-size: clamp(32px, 5.4vw, 54px);
+}
+
+/* Появление шапки каскадом: задаёт порядок чтения имя - роль - контакты.
+   Портрет не анимируем: у него mix-blend-mode, промежуточная прозрачность
+   ломала бы двухтональную подложку. */
+@media (prefers-reduced-motion: no-preference) {
+  .identity-text > * {
+    animation: enter-rise var(--t-enter) var(--ease) both;
+  }
+
+  .identity-text > *:nth-child(2) {
+    animation-delay: 70ms;
+  }
+
+  .identity-text > *:nth-child(3) {
+    animation-delay: 140ms;
+  }
+
+  .identity-text > *:nth-child(4) {
+    animation-delay: 210ms;
+  }
+
+  .identity-text > *:nth-child(5) {
+    animation-delay: 280ms;
+  }
+}
+
+@keyframes enter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.role {
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.lede {
+  max-width: 52ch;
+  margin-top: 16px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--t-hover) var(--ease),
+    border-color var(--t-hover) var(--ease),
+    transform var(--t-hover) var(--ease);
+}
+
+.btn-primary {
+  color: var(--accent-ink);
+  background-color: var(--accent);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary:hover {
+  background-color: color-mix(in srgb, var(--accent) 88%, var(--ink));
+}
+
+.btn-ghost {
+  color: var(--ink);
+  border-color: var(--line-strong);
+  background-color: transparent;
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.btn:active {
+  transform: scale(0.985);
+}
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin-top: 24px;
+  font-style: normal;
+  font-size: 15px;
+}
+
+.contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color var(--t-hover) var(--ease);
+}
+
+.contact span:last-child {
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--t-hover) var(--ease);
+}
+
+.contact:hover {
+  color: var(--ink);
+}
+
+.contact:hover span:last-child {
+  border-bottom-color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- price */
+
+.price {
+  padding: clamp(36px, 5vw, 56px) 0 clamp(40px, 6vw, 72px);
+}
+
+.price-head h2 {
+  font-size: clamp(28px, 3.6vw, 38px);
+}
+
+.price-note {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Поиск и разделы прилипают вместе: подсветка активного раздела бесполезна,
+   если чипы уехали за экран. */
+.pricebar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 12px 0 10px;
+  background-color: color-mix(in srgb, var(--page) 88%, transparent);
+  backdrop-filter: blur(10px);
+  transition: box-shadow var(--t-open) var(--ease),
+    background-color var(--t-open) var(--ease);
+}
+
+/* Прилипшая панель отделяется от прайса, который проезжает вплотную под ней.
+   Меняются только тень и плотность фона: sticky-элемент остаётся в потоке,
+   и любое изменение его высоты дёргало бы всю страницу. */
+.pricebar[data-stuck="true"] {
+  background-color: color-mix(in srgb, var(--page) 96%, transparent);
+  box-shadow: 0 10px 22px -18px rgb(23 33 29 / 55%);
+}
+
+[data-theme="dark"] .pricebar[data-stuck="true"] {
+  box-shadow: 0 10px 24px -16px rgb(0 0 0 / 80%);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+
+/* Метка стоит ровно на верхней кромке панели: по её уходу за экран видно,
+   что панель прилипла. Отступ панели живёт здесь, иначе метка окажется
+   выше кромки и тень включится раньше времени. */
+.toolbar-sentinel {
+  height: 1px;
+  margin: 24px 0 -1px;
+}
+
+.search {
+  flex: 1 1 280px;
+  max-width: 420px;
+}
+
+#input-search {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  color: var(--ink);
+  background-color: var(--panel);
+  outline: none;
+  transition: border-color var(--t-hover) var(--ease),
+    box-shadow var(--t-hover) var(--ease);
+}
+
+#input-search::placeholder {
+  color: var(--muted);
+}
+
+#input-search:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+#input-search:disabled {
+  cursor: progress;
+  opacity: 0.6;
+}
+
+.search-count {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.search-count:not([hidden]) {
+  animation: fade-in var(--t-hover) var(--ease) both;
+}
+
+mark {
+  padding: 0 2px;
+  border-radius: 4px;
+  color: inherit;
+  background-color: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 0 2px;
+}
+
+.category-nav:empty {
+  display: none;
+}
+
+.chip {
+  padding: 7px 15px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color var(--t-hover) var(--ease),
+    border-color var(--t-hover) var(--ease),
+    background-color var(--t-hover) var(--ease),
+    transform var(--t-hover) var(--ease);
+}
+
+.chip:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+  background-color: var(--accent-soft);
+  transform: translateY(-1px);
+}
+
+.chip:active {
+  transform: none;
+}
+
+/* Активный раздел подсвечивается при прокрутке: в длинном прайсе это
+   единственный ориентир, где сейчас находится читатель. */
+.chip[aria-current="true"] {
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  background-color: var(--accent);
+}
+
+.container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.table {
+  flex: 1;
+  min-width: 0;
+  padding: clamp(16px, 2.5vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-surface);
+  background-color: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+/* --------------------------------------------------------- price rows */
+
+.tableheader,
+.position-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 130px 120px;
+  gap: 16px;
+  align-items: center;
+  text-align: left;
+}
+
+.tableheader {
+  padding: 0 12px 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.tableheader div:last-child,
+.position-price {
+  text-align: right;
+}
+
+/* Высоту прилипшей панели меряет JS: она разная в обычном и поджатом виде,
+   а раздел не должен уезжать под неё при переходе по чипу. */
+.categorytable {
+  scroll-margin-top: calc(var(--bar-h, 96px) + 12px);
+}
+
+/* Класс вешает JS и только на первую отрисовку: раздел проявляется, когда
+   доходит до экрана. Без JS и при reduce-motion разделы видны сразу. */
+.categorytable.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--t-enter) var(--ease),
+    transform var(--t-enter) var(--ease);
+}
+
+.categorytable.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.category {
+  margin: 36px 0 8px;
+  color: var(--accent);
+  font-size: clamp(24px, 3vw, 30px);
+}
+
+.categorytable:first-of-type .category {
+  margin-top: 24px;
+}
+
+.position {
+  border-bottom: 1px solid var(--line);
+}
+
+.categorytable:last-of-type .position:last-child {
+  border-bottom: 0;
+}
+
+.position-info {
+  width: 100%;
+  padding: 15px 12px;
+  border: 0;
+  border-radius: var(--r-inner);
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color var(--t-hover) var(--ease);
+}
+
+.position-info:hover {
+  background-color: var(--accent-soft);
+}
+
+/* Раскрытая строка остаётся подсвеченной: описание длинное, и без якоря
+   теряется, к какой процедуре оно относится. */
+.position[data-open="true"] .position-info {
+  background-color: var(--accent-soft);
+}
+
+.position-info:hover .chevron {
+  background-color: var(--accent);
+}
+
+.position-name {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.chevron {
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+  margin-top: 5px;
+  background-color: var(--muted);
+  -webkit-mask: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABiUlEQVR4nN2VTU4CQRCFv0AgMeLShRxBuICu/NtLUOEGRiPByC0UL8BWDR7DlR5AMGLQLQuX6ELcjOnkddIZujMzLnlJJ9NV1a+K11UNLDqKQBPoAyPgW2skW0Mx/8IB8AFECesdqGchzgPXDsEzcA5UgGWtimwDJ64L5NIksOQ/wGnCIVPMGTDTmas0sljy7Qy/esdJUgsFFR3NT8iOls6OQxffdDRPpaVHrqE4jvDgXs62Y7sBlgjDVNpz9hfiuPMFv8m57tgi4Akoe+LL8pkYi6r2Zk7m8CVnKZYgAj6BLce+CUwcv8WK9oZrDlM5TZDFsdMdM+19tniCaVqJDDZi1do1kY+0EvXlNBMaxyrw4JA/AmueuI78t74EDTkHarlQx/QCfW7OvIjj0JegqIcr0vhnRdsZtEIoqO5c3m4G8j3gV2f3k4K7TpJWQC6LvCq35JdpqsnpVbQXOtSEVjUjJX13HM0teaYnpiY9k/5wxmlkCaGgh8u8La+aULPMt7GZbgle6GLgD1GcjfQfQa4oAAAAAElFTkSuQmCC") center / contain no-repeat;
+  mask: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABiUlEQVR4nN2VTU4CQRCFv0AgMeLShRxBuICu/NtLUOEGRiPByC0UL8BWDR7DlR5AMGLQLQuX6ELcjOnkddIZujMzLnlJJ9NV1a+K11UNLDqKQBPoAyPgW2skW0Mx/8IB8AFECesdqGchzgPXDsEzcA5UgGWtimwDJ64L5NIksOQ/wGnCIVPMGTDTmas0sljy7Qy/esdJUgsFFR3NT8iOls6OQxffdDRPpaVHrqE4jvDgXs62Y7sBlgjDVNpz9hfiuPMFv8m57tgi4Akoe+LL8pkYi6r2Zk7m8CVnKZYgAj6BLce+CUwcv8WK9oZrDlM5TZDFsdMdM+19tniCaVqJDDZi1do1kY+0EvXlNBMaxyrw4JA/AmueuI78t74EDTkHarlQx/QCfW7OvIjj0JegqIcr0vhnRdsZtEIoqO5c3m4G8j3gV2f3k4K7TpJWQC6LvCq35JdpqsnpVbQXOtSEVjUjJX13HM0teaYnpiY9k/5wxmlkCaGgh8u8La+aULPMt7GZbgle6GLgD1GcjfQfQa4oAAAAAElFTkSuQmCC") center / contain no-repeat;
+  transition: transform var(--t-open) var(--ease),
+    background-color var(--t-hover) var(--ease);
+}
+
+.position[data-open="true"] .chevron {
+  transform: rotate(180deg);
+  background-color: var(--accent);
+}
+
+.name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.position-duration {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.position-price {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  white-space: nowrap;
+}
+
+.description {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--t-open) var(--ease);
+}
+
+.position[data-open="true"] .description {
+  grid-template-rows: 1fr;
+}
+
+.description > div {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.description p {
+  padding: 4px 12px 20px 35px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+  opacity: 0;
+  transition: opacity var(--t-hover) var(--ease);
+}
+
+/* Текст догоняет раскрытие строки, иначе он читается уже в момент,
+   когда высота ещё едет. */
+.position[data-open="true"] .description p {
+  opacity: 1;
+  transition-delay: 0.14s;
+}
+
+/* --------------------------------------------------------- states */
+
+.state {
+  display: flex;
+  flex: 1;
+  min-height: 280px;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-surface);
+  background-color: var(--panel);
+}
+
+.state-message {
+  max-width: 46ch;
+  color: var(--muted);
+  text-align: center;
+}
+
+.table .state-message {
+  padding: 40px 12px;
+}
+
+.loader {
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --------------------------------------------------------- theme toggle */
+
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  color: var(--muted);
+  background-color: color-mix(in srgb, var(--panel) 82%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  opacity: 0.72;
+  transition: opacity var(--t-hover) var(--ease),
+    border-color var(--t-hover) var(--ease),
+    color var(--t-hover) var(--ease),
+    background-color var(--t-hover) var(--ease);
+}
+
+.theme-toggle:hover {
+  opacity: 1;
+  color: var(--ink);
+  border-color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
+}
+
+.theme-toggle-icon {
+  grid-area: 1 / 1;
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle-sun {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle-moon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle-sun {
+  display: block;
+}
+
+/* --------------------------------------------------------- to top */
+
+.to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  color: var(--ink);
+  background-color: var(--panel);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px) scale(0.94);
+  pointer-events: none;
+  transition: opacity var(--t-open) var(--ease),
+    transform var(--t-open) var(--ease),
+    border-color var(--t-hover) var(--ease),
+    background-color var(--t-hover) var(--ease);
+}
+
+.to-top[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.to-top:hover {
+  border-color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.to-top:active {
+  transform: scale(0.94);
+}
+
+.to-top .chevron {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  transform: rotate(180deg);
+}
+
+.to-top:hover .chevron {
+  background-color: var(--accent);
+}
+
+/* --------------------------------------------------------- footer */
+
+.site-footer {
+  padding: clamp(32px, 4vw, 48px) 0 48px;
+  border-top: 1px solid var(--line);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px 48px;
+  align-items: start;
+}
+
+.footer-name {
+  font-size: 24px;
+}
+
+.footer-grid .contacts {
+  margin-top: 0;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.disclaimer {
+  max-width: 62ch;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.disclaimer + .disclaimer {
+  margin-top: 8px;
+}
+
+/* --------------------------------------------------------- responsive */
+
+@media (max-width: 860px) {
+  .tableheader,
+  .position-info {
+    grid-template-columns: minmax(0, 1fr) 104px 104px;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 680px) {
+  :root {
+    --gutter: 16px;
+  }
+
+  .identity {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* На узком экране портрет стоит отдельным блоком, без текста рядом, и
+     читается тёмным пятном с резким обрывом плеч. Приглушаем тон и
+     растворяем раньше: получается подложка к имени, а не объект.
+     Тон гасим прозрачностью, а не filter: brightness и contrast выбивают
+     фон снимка в белый, и правка любого из них проявит подложку. */
+  .portrait {
+    --pw: 132px;
+
+    opacity: 0.62;
+
+    /* Полная плотность держится до подбородка (примерно 52% высоты), ниже
+       плечи уходят в ноль до края кадра - иначе виден его прямой обрез. */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 52%,
+      rgb(0 0 0 / 26%) 76%,
+      transparent 92%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 52%,
+      rgb(0 0 0 / 26%) 76%,
+      transparent 92%
+    );
+  }
+
+  [data-theme="dark"] .portrait {
+    opacity: 0.48;
+  }
+
+  .actions {
+    margin-top: 22px;
+  }
+
+  .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .contacts {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Панель тянется на всю ширину экрана: лента разделов уходит в поля по
+     краям, и без этого чипы прокручивались бы мимо её фона, прямо по
+     карточке прайса. Заодно прайс проезжает под размытием целиком. */
+  .pricebar {
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+  }
+
+  /* Восемь разделов в столбик съедают экран, поэтому лента с прокруткой.
+     Прокрутка идёт внутри колонки контента: вынос ленты в край экрана
+     ломал общую сетку, чипы уезжали за поля, по которым выровнено всё
+     остальное. */
+  .category-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px 0 4px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .category-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .footer-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tableheader {
+    display: none;
+  }
+
+  .position-info {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name price"
+      "duration price";
+    gap: 2px 14px;
+    align-items: start;
+    padding: 14px 8px;
+  }
+
+  .position-name {
+    grid-area: name;
+  }
+
+  .position-duration {
+    grid-area: duration;
+    padding-left: 23px;
+    font-size: 14px;
+  }
+
+  .position-price {
+    grid-area: price;
+    align-self: center;
+  }
+
+  .description p {
+    padding: 6px 8px 18px 31px;
+  }
+
+  .table {
+    padding: 8px 12px;
+  }
+
+  .to-top {
+    right: 14px;
+    bottom: 14px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .theme-toggle {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-toggle-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .btn:hover,
+  .chip:hover {
+    transform: none;
+  }
+
+  .loader {
+    animation: none;
+    border-top-color: var(--line-strong);
+  }
+}

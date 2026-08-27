@@ -5,38 +5,41 @@ import up from "../../../public/assets/up.png";
 
 const Position = ({ position, showInfo, descriptionHandler }) => {
   let arrow = showInfo.includes(position.id);
-
   return (
-    <div className="position">
-      <div
+    <article className="position" data-open={arrow}>
+      <button
         className="position-info"
+        type="button"
+        aria-expanded={arrow}
         onClick={() => descriptionHandler(position.id)}
       >
         <div className="position-name">
           {arrow ? (
             <span className="up">
-              <Image src={up} alt="up" />
+              <Image src={up} alt="up" className="chevron" />
             </span>
           ) : (
             <span className="down">
-              <Image src={down} alt="down" />
+              <Image src={down} alt="down" className="chevron" />
             </span>
           )}
           <span className="name">{position["Наименование"]}</span>
         </div>
-        <div className="unit_price">
+        <div className="unit_price position-duration">
           <span>{position["Продолжительность процедуры"]}</span>
         </div>
-        <div className="unit_price">
+        <div className="unit_price position-price">
           <span>{position["цена, ₽"]}</span>
         </div>
-      </div>
+      </button>
       {arrow ? (
         <div className="description">
-          <p>{position["Описание"]}</p>
+          <div>
+            <p>{position["Описание"]}</p>
+          </div>
         </div>
       ) : null}
-    </div>
+    </article>
   );
 };
 
