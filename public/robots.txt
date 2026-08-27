@@ -4,4 +4,4 @@ Allow: /
 Disallow: /_next/
 Disallow: /static/
 
-Sitemap: selivanovams.vercel.app
+Sitemap: https://selivanovams.vercel.app/

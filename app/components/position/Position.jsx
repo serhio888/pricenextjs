@@ -26,7 +26,7 @@ const Position = ({ position, showInfo, descriptionHandler }) => {
           <span className="name">{position["Наименование"]}</span>
         </div>
         <div className="unit_price position-duration">
-          <span>{position["Продолжительность процедуры"]}</span>
+          <span>{position["Длительность"]}</span>
         </div>
         <div className="unit_price position-price">
           <span>{position["цена"]}&nbsp;₽</span>
