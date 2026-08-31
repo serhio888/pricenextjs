@@ -1,7 +1,5 @@
 
+Sitemap: https://selivanovams.vercel.app/sitemap.xml
 User-agent: *
-Allow: /
-Disallow: /_next/
-Disallow: /static/
+Allow: 
 
-Sitemap: https://selivanovams.vercel.app/
