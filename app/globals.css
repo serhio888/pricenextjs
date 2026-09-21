@@ -298,6 +298,34 @@ a {
   border-bottom: 1px solid var(--line);
 }
 
+.header-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.header-visual {
+  position: relative;
+  aspect-ratio: 1 / 1;
+}
+
+.header-visual img {
+  object-fit: contain;
+}
+
+@media (max-width: 860px) {
+  .header-row {
+    grid-template-columns: 1fr;
+  }
+
+  .header-visual {
+    order: -1;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
 .identity {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
