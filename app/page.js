@@ -4,6 +4,7 @@ import Footer from "./components/footer/footer";
 import About  from "./components/about/About";
 import PriceListClient from "./components/showinfo/priceListClient";
 import Portfolio from "./components/portfolio/Portfolio";
+import Certificates from "./components/certificates/Certificates";
 
 
 
@@ -74,6 +75,7 @@ export default async function GoogleSheetsPage() {
         <Header/>
         <About/>
         <Portfolio />
+        <Certificates />
         <PriceListClient initialPositions={data.objPositions} headerTable={data.headers} />
         <Footer/>
     </div>
