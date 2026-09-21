@@ -1,0 +1,143 @@
+.section-portfolio {
+  padding: clamp(36px, 5vw, 56px) 0 clamp(40px, 6vw, 72px);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-portfolio .display {
+  margin-top: 6px;
+  font-size: clamp(26px, 3.4vw, 34px);
+}
+
+.portfolio-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 40px) 0 16px;
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: calc(340px * 4 / 3 + 44px);
+}
+
+.work-pair {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 682px;
+  margin-left: -341px;
+  cursor: pointer;
+  transition: transform 0.45s cubic-bezier(0.22, 0.68, 0, 1.01),
+    opacity 0.45s ease;
+}
+
+.work-pair.is-active {
+  cursor: default;
+}
+
+.work-images {
+  display: flex;
+  gap: 2px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.work-photo {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(160deg, var(--panel), var(--line));
+  display: flex;
+  align-items: flex-end;
+}
+
+.work-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.work-tag {
+  margin: 8px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(20, 18, 16, 0.6);
+  padding: 3px 9px;
+  border-radius: 2px;
+}
+
+.work-tag-after {
+  background: var(--accent);
+}
+
+.work-caption {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.carousel-arrow {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: none;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-arrow:hover {
+  background: var(--panel);
+}
+
+.carousel-arrow-left {
+  margin-right: 8px;
+}
+
+.carousel-arrow-right {
+  margin-left: 8px;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.carousel-dot.is-active {
+  background: var(--accent);
+}
+
+@media (max-width: 560px) {
+  .carousel-track {
+    height: calc((260px - 2px) / 2 * 4 / 3 + 44px);
+  }
+  .work-pair {
+    width: 260px;
+    margin-left: -130px;
+  }
+}
