@@ -48,16 +48,7 @@ export default function PriceListClient({ initialPositions, headerTable }) {
         </p>
       </div>
       <div className="toolbar-sentinel" aria-hidden="true"></div>
-      {/* <div className="searchpanel">
-        <input
-          type="text"
-          onChange={searchHandler}
-          value={searchPosition}
-          placeholder="Введите услугу или препарат"
-          maxLength={15}
-          id="input-search"
-        />
-      </div> */}
+
       <div className="toolbar">
         <div className="search">
           <input

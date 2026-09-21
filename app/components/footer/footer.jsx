@@ -8,7 +8,7 @@ import vk from "../../../public/assets/vk.png";
 
 function Footer() {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" id="contacts">
       <div className="footer-grid">
         <div>
           <p className="footer-name display">Селиванова Мария Сергеевна</p>

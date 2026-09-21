@@ -5,6 +5,7 @@ import About  from "./components/about/About";
 import PriceListClient from "./components/showinfo/priceListClient";
 import Portfolio from "./components/portfolio/Portfolio";
 import Certificates from "./components/certificates/Certificates";
+import Nav from "./components/nav/Nav";
 
 
 
@@ -72,6 +73,7 @@ export default async function GoogleSheetsPage() {
   
   return (
     <div className="page">
+        <Nav />
         <Header/>
         <About/>
         <Portfolio />
