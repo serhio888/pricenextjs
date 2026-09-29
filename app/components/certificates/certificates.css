@@ -11,7 +11,7 @@
 .certificates-grid {
   margin-top: clamp(28px, 4vw, 40px);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: clamp(16px, 2.5vw, 24px);
 }
 
@@ -29,7 +29,7 @@
 }
 
 .certificate-thumb {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1.414 / 1;
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -53,6 +53,7 @@
   font-size: 13px;
   color: var(--muted);
   line-height: 1.35;
+  text-align: center;
 }
 
 /* ---------------------------------------------------------------- lightbox */
@@ -69,26 +70,27 @@
 }
 
 .lightbox-content {
-  display: flex;
+ display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  max-width: min(560px, 86vw);
+  max-width: 92vw;
 }
 
 .lightbox-image {
-  width: 100%;
-  aspect-ratio: 3 / 4;
+  display: flex;
+  justify-content: center;
   border-radius: 4px;
   overflow: hidden;
-  background: linear-gradient(160deg, #3a332c, #211c18);
 }
 
 .lightbox-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
   display: block;
+  width: auto;
+  height: auto;
+  max-width: min(84vw, 1100px);
+  max-height: 80vh;
+  object-fit: contain;
 }
 
 .lightbox-caption {

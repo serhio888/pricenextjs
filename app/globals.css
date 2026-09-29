@@ -250,7 +250,7 @@ a {
   font-family: "Cormorant", "Times New Roman", serif;
   font-style: italic;
   font-weight: 400;
-  /* Курсивная кириллица (р, у, д) требует запаса под выносные элементы. */
+  text-wrap: balance;
   line-height: 1.14;
   padding-bottom: 2px;
 }
