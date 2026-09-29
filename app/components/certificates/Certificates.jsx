@@ -120,8 +120,6 @@ const Certificates = () => {
   const goPrev = () => setActiveIndex((i) => (i - 1 + total) % total);
   const goNext = () => setActiveIndex((i) => (i + 1) % total);
 
-  console.log(activeIndex);
-
   useEffect(() => {
     if (!isOpen) return;
 
