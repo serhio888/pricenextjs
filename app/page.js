@@ -24,7 +24,7 @@ async function getGoogleSheetData() {
     let objPositions = {};
     let name = undefined;
     try {
-    const response = await fetch(url);
+    const response = await fetch(url,{ cache: "no-store" });
     if (!response.ok) {
       throw new Error('Не удалось загрузить данные из Google Таблиц');
     }
@@ -68,7 +68,6 @@ async function getGoogleSheetData() {
 export default async function GoogleSheetsPage() {
   // Данные загружаются прямо на сервере перед отправкой HTML клиенту
   const data = await getGoogleSheetData();
-  console.log(data)
 
   
   return (
