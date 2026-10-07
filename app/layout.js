@@ -5,8 +5,8 @@ export const metadata = {
     title: 'Селиванова Мария Сергеевна | врач-косметолог г.Оса',
     description: 'Услуги сертифицированного косметолога в Осе. Цены на контурную пластику, уходовые процедуры и аппараты. Актуальный прайс-лист и запись на прием.',
      other: {
-    "yandex-verification": "cc05c52dc129f35c",
-    "google-site-verification": "TCp9cNM2UlUhWCyXX2sKqgWZKH_86gFE87k4IPAgaNQ",
+    "yandex-verification": "4d8b3eb7ff86ec8a",
+    "google-site-verification": "xU9l7fIs807Wj6WTCR98myKHrZ7qcVSOCqZ7LJb-oeI",
      }
   };
 

@@ -1,5 +1,5 @@
 
-Sitemap: https://selivanovams.vercel.app/sitemap.xml
+Sitemap: https://selivanovams.ru/sitemap.xml
 User-agent: *
 Allow: 
 
