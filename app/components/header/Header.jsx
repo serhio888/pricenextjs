@@ -12,11 +12,11 @@ const Header = () => {
   return (
     <header className="site-header">
       <div className="identity">
-        <div
+        {/* <div
           className="portrait"
           role="img"
           aria-label="Портрет врача-косметолога Марии Селивановой"
-        ></div>
+        ></div> */}
 
         <div className="identity-text">
           <h1 className="display" id="page-top" tabIndex="-1">
