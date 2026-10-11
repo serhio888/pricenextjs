@@ -51,7 +51,7 @@
 
 
 
-[data-theme="dark"] {
+/* [data-theme="dark"] {
   color-scheme: dark;
 
   --page: #0f1412;
@@ -67,7 +67,7 @@
 
   --portrait-filter: grayscale(1) brightness(0.72) contrast(3.65) invert(1);
   --portrait-blend: screen;
-}
+} */
 
 /* ---------------------------------------------------------------- base */
 
@@ -244,7 +244,7 @@ a {
   align-items: end;
 }
 
-.portrait {
+/* .portrait {
   --pw: clamp(140px, 18vw, 216px);
 
   width: var(--pw);
@@ -257,7 +257,7 @@ a {
   mix-blend-mode: var(--portrait-blend);
   -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
-}
+} */
 
 .identity-text h1 {
   font-size: clamp(32px, 5.4vw, 54px);

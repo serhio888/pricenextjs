@@ -16,11 +16,11 @@ const Position = ({ position, showInfo, descriptionHandler }) => {
         <div className="position-name">
           {arrow ? (
             <span className="up">
-              <Image src={up} alt="up" className="chevron" />
+              <Image src={up} alt="" className="chevron" />
             </span>
           ) : (
             <span className="down">
-              <Image src={down} alt="down" className="chevron" />
+              <Image src={down} alt="" className="chevron" />
             </span>
           )}
           <span className="name">{position["Наименование"]}</span>
