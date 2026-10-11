@@ -1,12 +1,17 @@
 import React from "react";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/footer";
+import About  from "./components/about/About";
 import PriceListClient from "./components/showinfo/priceListClient";
+import Portfolio from "./components/portfolio/Portfolio";
+import Certificates from "./components/certificates/Certificates";
+import Nav from "./components/nav/Nav";
 
 
 
 import Papa from "papaparse";
 import { nanoid } from "nanoid";
+
 
 
 const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLxuGZdqHNd4WOc1IUYf_U_pR8jTpELHONnZ5xOIN6hMq9YCQRMjW73q69heqFfBwdS_Z5EDwBB2tn/pub?output=csv";
@@ -19,7 +24,7 @@ async function getGoogleSheetData() {
     let objPositions = {};
     let name = undefined;
     try {
-    const response = await fetch(url);
+    const response = await fetch(url,{ cache: "no-store" });
     if (!response.ok) {
       throw new Error('Не удалось загрузить данные из Google Таблиц');
     }
@@ -63,12 +68,15 @@ async function getGoogleSheetData() {
 export default async function GoogleSheetsPage() {
   // Данные загружаются прямо на сервере перед отправкой HTML клиенту
   const data = await getGoogleSheetData();
-  console.log(data)
 
   
   return (
     <div className="page">
+        <Nav />
         <Header/>
+        <About/>
+        <Portfolio />
+        <Certificates />
         <PriceListClient initialPositions={data.objPositions} headerTable={data.headers} />
         <Footer/>
     </div>
