@@ -11,65 +11,39 @@
   font-display: swap;
 }
 
-/* ---------------------------------------------------------------- tokens */
-/* Радиусы: интерактивное - пилюля, поверхности - 16px, вложенное - 12px. */
-
 :root {
-  color-scheme: light;
+   color-scheme: light;
+  --page: #d3e3d8;         /* фон страницы: насыщенный шалфейный */
+  --panel: #e6f1ea;        /* карточки и прайс (светлее фона) */
 
-  --page: #f4f6f4;
-  --panel: #fcfdfc;
-  --ink: #17211d;
-  --muted: #5c6b64;
-  --line: #dce3de;
-  --line-strong: #c6d1cb;
-  --accent: #2e5c4c;
-  --accent-ink: #fcfdfc;
-  --accent-soft: #e9f0ec;
-  --shadow: 0 1px 2px rgb(23 33 29 / 4%), 0 12px 32px rgb(23 33 29 / 6%);
+  --line: #b9cfbf;         /* тонкие разделители */
+  --line-strong: #9db7a5;  /* рамки полей и контурных кнопок */
 
-  /* Портрет двухтональный: яркость/контраст выбивают светлый тон в чистый
-     белый, поэтому multiply убирает подложку и оставляет силуэт. */
-  --portrait-filter: grayscale(1) brightness(0.72) contrast(3.65);
-  --portrait-blend: multiply;
+  --accent: #12573a;       /* глубокий изумрудный акцент */
+  --accent-soft: #bfd9c8;  /* подсветка при наведении, открытая строка прайса */
+  --accent-ink: #f4faf6;   /* текст на залитой зелёной кнопке */
 
-  --r-surface: 16px;
-  --r-inner: 12px;
-  --r-pill: 999px;
+  --ink: #10211a;          /* основной текст */
+  --muted: #44574d;        /* второстепенный текст */
 
-  /* Единая кривая на всю страницу: быстрый старт, долгое затухание.
-     Отклик на курсор держим коротким, раскрытие и появление - длиннее. */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --t-hover: 0.22s;
-  --t-open: 0.42s;
-  --t-enter: 0.7s;
+  --shadow: 0 1px 2px rgb(16 33 26 / 6%), 0 12px 32px rgb(16 33 26 / 10%);
 
-  --shell: 1080px;
-  --gutter: 24px;
+  /* ---------- СКРУГЛЕНИЯ ---------- */
+  --r-surface: 16px;       /* крупные блоки (таблица прайса) */
+  --r-inner: 12px;         /* вложенные элементы внутри блоков */
+  --r-pill: 999px;         /* кнопки и плашки в форме таблетки */
+
+  /* ---------- АНИМАЦИЯ ---------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); /* общая кривая: быстрый старт, плавное затухание */
+  --t-hover: 0.22s;        /* реакция на наведение мыши */
+  --t-open: 0.42s;         /* раскрытие строки прайса */
+  --t-enter: 0.7s;         /* появление шапки при загрузке */
+
+  /* ---------- РАСКЛАДКА ---------- */
+  --shell: 1080px;         /* максимальная ширина содержимого страницы */
+  --gutter: 24px;          /* боковые поля (на телефоне переопределяется на 16px) */
 }
 
-
-
-
-/* [data-theme="dark"] {
-  color-scheme: dark;
-
-  --page: #0f1412;
-  --panel: #151b18;
-  --ink: #e8edea;
-  --muted: #9baaa3;
-  --line: #252e2a;
-  --line-strong: #33403a;
-  --accent: #7fbfa4;
-  --accent-ink: #0f1412;
-  --accent-soft: #1a2621;
-  --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 12px 32px rgb(0 0 0 / 35%);
-
-  --portrait-filter: grayscale(1) brightness(0.72) contrast(3.65) invert(1);
-  --portrait-blend: screen;
-} */
-
-/* ---------------------------------------------------------------- base */
 
 * {
   box-sizing: border-box;
@@ -113,6 +87,20 @@ a {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+  color: var(--ink);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+input {
+  caret-color: var(--accent);
 }
 
 @media (prefers-reduced-motion: no-preference) {
