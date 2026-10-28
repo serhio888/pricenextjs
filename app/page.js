@@ -24,7 +24,7 @@ async function getGoogleSheetData() {
     let objPositions = {};
     let name = undefined;
     try {
-    const response = await fetch(url,{ cache: "no-store" });
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error('Не удалось загрузить данные из Google Таблиц');
     }
@@ -60,7 +60,7 @@ async function getGoogleSheetData() {
     }
   } catch (error) {
     console.error('Ошибка при работе с Google Sheets:', error);
-    return [];
+    return { headers: [], objPositions: {} };
   }
 }
 

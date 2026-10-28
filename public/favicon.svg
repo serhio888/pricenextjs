@@ -1,0 +1,41 @@
+<svg width="120.00000000000001" height="120.00000000000001" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <clipPath id="c">
+   <circle id="svg_1" r="60" cy="60" cx="60"/>
+  </clipPath>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <!-- background -->
+  <circle id="svg_3" fill="#ECDCC3" r="60" cy="60" cx="60"/>
+  <!-- hair back -->
+  <path id="svg_4" stroke-linejoin="round" stroke-width="2.5" stroke="#4A2B26" fill="#B4493B" d="m60,14c-24,0 -36,18 -35,42c1,18 5,30 5,40l60,0c0,-10 4,-22 5,-40c1,-24 -11,-42 -35,-42z"/>
+  <!-- neck / shoulders hint -->
+  <path id="svg_5" stroke-linejoin="round" stroke-width="2.5" stroke="#4A2B26" fill="#F4CDBB" d="m48,84l0,16l24,0l0,-16l-24,0z"/>
+  <!-- face -->
+  <path id="svg_6" stroke-linejoin="round" stroke-width="2.5" stroke="#4A2B26" fill="#F8D9C8" d="m60,30c-16,0 -24,12 -24,28c0,16 10,28 24,28c14,0 24,-12 24,-28c0,-16 -8,-28 -24,-28z"/>
+  <!-- fringe -->
+  <path id="svg_7" stroke-linejoin="round" stroke-width="2.5" stroke="#4A2B26" fill="#B4493B" d="m36,58c-2,-20 10,-34 26,-32c14,2 24,14 22,32c-4,-10 -8,-16 -14,-20c-8,8 -22,12 -34,20z"/>
+  <!-- eyes (closed, smiling) -->
+  <path id="svg_8" stroke-linecap="round" stroke-width="2.5" stroke="#4A2B26" fill="none" d="m47,62q5,5 10,0"/>
+  <path id="svg_9" stroke-linecap="round" stroke-width="2.5" stroke="#4A2B26" fill="none" d="m65,62q5,5 10,0"/>
+  <!-- cheeks -->
+  <ellipse id="svg_10" opacity="0.8" fill="#F0907F" ry="3" rx="4.5" cy="70.07407" cx="46.77778"/>
+  <ellipse id="svg_11" opacity="0.8" fill="#F0907F" ry="3" rx="4.5" cy="69.88889" cx="74.77778"/>
+  <!-- smile -->
+  <path id="svg_12" stroke-linecap="round" stroke-width="2.5" stroke="#4A2B26" fill="none" d="m55,74q6,6 12,0"/>
+  <!-- makeup brush -->
+  <g id="svg_13" transform="rotate(38 21.999999999999996,86) ">
+   <!-- handle -->
+   <rect id="svg_14" stroke-width="2.5" stroke="#4A2B26" fill="#E9B27A" rx="4.5" height="40" width="9" y="90" x="17"/>
+   <!-- ferrule -->
+   <rect id="svg_15" stroke-width="2.5" stroke="#4A2B26" fill="#F5F0E8" rx="2" height="10" width="11" y="82" x="16"/>
+   <!-- bristles -->
+   <path id="svg_16" stroke-linejoin="round" stroke-width="2.5" stroke="#4A2B26" fill="#C97A4A" d="m16,83c-3,-13 1,-23 5.5,-25c4.5,2 8.5,12 5.5,25l-11,0z"/>
+  </g>
+ </g>
+</svg>
