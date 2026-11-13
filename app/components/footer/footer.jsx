@@ -39,6 +39,21 @@ function Footer() {
             />
             <span>cosmetologist_sms</span>
           </a>
+          <a
+            className="contact"
+            href="https://max.ru/u/f9LHodD0cOKinE_8BHnrHULTsgGQsSsXpOVIwt2WpO1_VYEGbkwXU92hFOk"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image
+              src={max}
+              alt=""
+              className="brandlogo"
+              width="20"
+              height="20"
+            />
+            <span>Написать в MAX</span>
+          </a>
         </address>
       </div>
 

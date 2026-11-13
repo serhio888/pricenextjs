@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import "./nav.css";
 
 const links = [
-  { id: "about", label: "Обо мне" },
-  { id: "portfolio", label: "Работы" },
   { id: "certificates", label: "Дипломы" },
   { id: "price", label: "Прайс" },
   { id: "contacts", label: "Контакты" },

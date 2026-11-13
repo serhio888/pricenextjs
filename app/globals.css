@@ -163,7 +163,7 @@ input {
 
 .header-row {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1fr;
   gap: clamp(32px, 5vw, 64px);
   align-items: center;
 }

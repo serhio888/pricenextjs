@@ -4,12 +4,12 @@ import './globals.css';
 export const metadata = { 
     metadataBase: new URL('https://selivanovams.ru'),
     title: 'Селиванова Мария Сергеевна | врач-косметолог г.Оса',
-    description: 'Услуги сертифицированного косметолога в Осе. Цены на контурную пластику, уходовые процедуры и аппараты. Актуальный прайс-лист и запись на прием.',
+    description: 'Врач-косметолог в Осе. Актуальный прайс-лист на контурную пластику, уходовые процедуры и аппаратные методики. Запись по телефону, на vk.com или MAX',
     alternates: { canonical: '/' },
     icons: {icon: '/favicon.svg',},
     openGraph: {
     title: 'Селиванова Мария Сергеевна — врач-косметолог в Осе',
-    description: 'Прайс-лист и запись на приём.',
+    description: 'Индивидуальные программы ухода за лицом на основе диагностики кожи. Врач высшей категории с большим опытом работы в медицине.',
     url: '/',
     siteName: 'Селиванова М.С.',
     locale: 'ru_RU',
@@ -35,7 +35,6 @@ const jsonLd = {
   '@id': 'https://selivanovams.ru/#business',
   name: 'Селиванова Мария Сергеевна — врач-косметолог',
   url: 'https://selivanovams.ru',
-  image: 'https://selivanovams.ru/assets/ms.jpg',
   telephone: '+79082468092',
   email: 'makkaloy@mail.ru',
   priceRange: 'от 1200 ₽',

@@ -7,7 +7,6 @@ import email from "../../../public/assets/email.png";
 import max from "../../../public/assets/max.png";
 import location from "../../../public/assets/location.png";
 import vk from "../../../public/assets/vk.png";
-import label from "../../../public/assets/label.png";
 
 const Header = () => {
   return (
@@ -15,19 +14,10 @@ const Header = () => {
       <div className="header-row">
         <div className="identity">
           <div className="identity-text">
-            <div className="title-row">
-              <Image
-                src={label}
-                alt=""
-                className="label-inline"
-                width={56}
-                height={56}
-              />
-              <h1 className="display" id="page-top" tabIndex="-1">
-                Уход, который слушает вашу кожу, а не спорит с ней
-              </h1>
-            </div>
-
+            <h1 className="display" id="page-top" tabIndex="-1">
+              Селиванова Мария Сергеевна
+            </h1>
+            <p className="role">Врач-косметолог</p>
             <p className="lede">
               Индивидуальные программы ухода за лицом на основе диагностики кожи
               — без агрессивных процедур и обещаний за один сеанс.
@@ -40,6 +30,28 @@ const Header = () => {
               </a>
               <a
                 className="btn btn-ghost"
+                href="https://vk.com/cosmetologist_sms"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Image
+                  src={vk}
+                  alt=""
+                  className="brandlogo"
+                  width="20"
+                  height="20"
+                />
+                <span>Написать во ВКонтакте</span>
+              </a>
+            </div>
+
+            <address className="contacts">
+              <a className="contact" href="mailto:makkaloy@mail.ru">
+                <span className="ico ico-mail" aria-hidden="true"></span>
+                <span>makkaloy@mail.ru</span>
+              </a>
+              <a
+                className="contact"
                 href="https://max.ru/u/f9LHodD0cOKinE_8BHnrHULTsgGQsSsXpOVIwt2WpO1_VYEGbkwXU92hFOk"
                 target="_blank"
                 rel="noreferrer"
@@ -53,28 +65,6 @@ const Header = () => {
                 />
                 <span>Написать в MAX</span>
               </a>
-            </div>
-
-            <address className="contacts">
-              <a className="contact" href="mailto:makkaloy@mail.ru">
-                <span className="ico ico-mail" aria-hidden="true"></span>
-                <span>makkaloy@mail.ru</span>
-              </a>
-              <a
-                className="contact"
-                href="https://vk.com/cosmetologist_sms"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Image
-                  src={vk}
-                  alt=""
-                  className="brandlogo"
-                  width="20"
-                  height="20"
-                />
-                <span>cosmetologist_sms</span>
-              </a>
               <a
                 className="contact"
                 href="https://yandex.ru/maps/?pt=55.476565,57.287256&amp;z=15&amp;l=map"
@@ -86,16 +76,6 @@ const Header = () => {
               </a>
             </address>
           </div>
-        </div>
-
-        <div className="header-visual">
-          <Image
-            src={label}
-            alt=""
-            fill
-            style={{ objectFit: "contain" }}
-            priority
-          />
         </div>
       </div>
     </header>
